@@ -55,6 +55,7 @@ void create_header_only() {
     ContentNode parserHeader; parserHeader.beginingLine = 6; parserHeader.endLine = 27; parserHeader.filePath = "../library/include/gltfparser.h";
 
     char separator1[] = "// Functions implementation\n\n";
+    char defineMacroStart[] = "#ifdef GLTFPARSER_IMPLEMENTATION\n\n";
 
     // source, begining line, end line, filepath
     ContentNode jsmnSource; jsmnSource.beginingLine = 2; jsmnSource.endLine = 359; jsmnSource.filePath = "../library/source/jsmn.c";
@@ -62,9 +63,9 @@ void create_header_only() {
     ContentNode jsonSource; jsonSource.beginingLine = 7; jsonSource.endLine = 118; jsonSource.filePath = "../library/source/gltfparser_json.c";
     ContentNode parserSource; parserSource.beginingLine = 10; parserSource.endLine = 2387; parserSource.filePath = "../library/source/gltfparser.c";
 
-    char footer[] = {
-        "#endif // GLTFPARSER_INCLUDED\n\n"
-    };
+    char defineMacroEnd[] = "#endif // GLTFPARSER_IMPLEMENTATION\n\n";
+
+    char footer[] = { "#endif // GLTFPARSER_INCLUDED\n\n" };
 
     FILE* outputFile = fopen("../library/header_only/gltfparser.h", "w");
     if (!outputFile) return;
@@ -82,12 +83,14 @@ void create_header_only() {
     fprintf_content_node(outputFile, &parserHeader);
 
     fprintf(outputFile, "%s", separator1);
+    fprintf(outputFile, "%s", defineMacroStart);
 
     fprintf_content_node(outputFile, &jsmnSource);
     fprintf_content_node(outputFile, &utilSource);
     fprintf_content_node(outputFile, &jsonSource);
     fprintf_content_node(outputFile, &parserSource);
 
+    fprintf(outputFile, "%s", defineMacroEnd);
     fprintf(outputFile, "%s", footer);
 
     fclose(outputFile);

@@ -682,6 +682,8 @@ GLTF_API const char* GLTF_GetErrors();
 
 // Functions implementation
 
+#ifdef GLTFPARSER_IMPLEMENTATION
+
 /// it is weird that C does not declare NULL as anything
 #ifndef NULL
     #ifdef __cplusplus
@@ -3657,5 +3659,7 @@ void GLTF_Free(GLTF2* data) {
 GLTF_API const char* GLTF_GetErrors() {
 	return s_gErrors;
 }
+#endif // GLTFPARSER_IMPLEMENTATION
+
 #endif // GLTFPARSER_INCLUDED
 

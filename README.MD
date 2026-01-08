@@ -23,7 +23,7 @@ The dynamic library can be built as following:
    2) Go into such folder and run ```cmake .. -DGLTF_SHARED_LIBRARY```
    3) Either a solution or the project will be built in the desired folder
 
-The header-only version is located [here](library/header_only/gltfparser.h) and it's generated using the [developer tools](devtools.c)
+The header-only version is located [here](library/header_only/gltfparser.h) and it's generated using the [developer tools](devtools.c), you must define **GLTFPARSER_IMPLEMENTATION** in exactly one .c/.cpp file and include gltfparser.h in order to use it.
 
 ## Usage
 You may want to check the [example.c](example.c) program or:
